@@ -42,7 +42,7 @@ export default function Login({ setToken }) {
   const [alertContent, setAlertContent] = useState("");
 
   const loginUser = async (credentials) => {
-    return fetch("http://localhost:9999/auth/login", {
+    return fetch("http://localhost:8080/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,16 +71,15 @@ export default function Login({ setToken }) {
       setAlertType("error");
       setShowAlert(true);
     } else if (json.status === "OK") {
-      setAlertContent("Wilkommen " + json.user.username + "!");
+      setAlertContent("Wilkommen " + json.username + "!");
       setAlertType("success");
       setShowAlert(true);
-      setToken(json.user.token);
+      setToken(json.token);
     } else {
       setAlertContent("Unbekannter Fehler beim einloggen!");
       setAlertType("error");
       setShowAlert(true);
     }
-    console.log(json);
   };
 
   return (
