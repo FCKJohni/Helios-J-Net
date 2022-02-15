@@ -21,7 +21,7 @@ export default function Dashboard({ token, setToken, perms, setPerms }) {
   }
 
   useLayoutEffect(() => {
-    fetch("http://localhost:8080/auth", {
+    fetch("https://heliosjserver.herokuapp.com/auth", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -32,12 +32,14 @@ export default function Dashboard({ token, setToken, perms, setPerms }) {
         if (data.status === 401) {
           reset();
         } else {
-          const json = data.json();
-          if (json.perms) {
-            setPerms(json.perms);
-          } else {
-            reset();
-          }
+          data.json().then((jdata) => {
+            if (jdata.perms) {
+              setPerms(jdata.perms);
+            } else {
+              console.log("reset");
+              reset();
+            }
+          });
         }
       })
       .catch(function (error) {

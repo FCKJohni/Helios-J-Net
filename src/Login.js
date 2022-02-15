@@ -42,7 +42,7 @@ export default function Login({ setToken }) {
   const [alertContent, setAlertContent] = useState("");
 
   const loginUser = async (credentials) => {
-    return fetch("http://localhost:8080/auth/login", {
+    return fetch("https://heliosjserver.herokuapp.com/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
